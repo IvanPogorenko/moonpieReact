@@ -1,0 +1,24 @@
+.ItemCardContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.ItemCard{
+    width: 800px;
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+}
+
+.PictureBlock{
+    width: 300px;
+    height: 400px;
+    background-color: aliceblue;
+}
+
+.RadioGroup{
+    display: flex;
+    flex-direction: row;
+}

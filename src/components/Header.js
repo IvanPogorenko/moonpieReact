@@ -29,6 +29,9 @@ function Header() {
                 <li>
                     <Link to='how-to-order' className='nav_link'>Как заказать</Link>
                 </li>
+                <li>
+                    <Link to='/registration' className='nav_link'>Регистрация</Link>
+                </li>
             </ul>
         </header>
     );
