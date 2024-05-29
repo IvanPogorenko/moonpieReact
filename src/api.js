@@ -75,7 +75,7 @@ export const addItemToCart = async (cartData) => {
         },
         {
             headers: {
-                Authorization: 'Bearer '+{token}
+                Authorization: {token}
             }
         });
         console.log(response.data);
