@@ -64,16 +64,18 @@ export const getItemByName = async (itemName) => {
 export const addItemToCart = async (cartData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await api.post('/api/cart',
-        {
+        console.log('Bearer ${token}')
+        const response = await api.post('/api/cart',{
             data: {
                 itemName: cartData.itemName,
                 size: cartData.size,
                 color: cartData.color,
                 quantity: 1
-            },
+            }
+        },
+        {
             headers: {
-                Authorization: `${token}`
+                Authorization: 'Bearer '+{token}
             }
         });
         console.log(response.data);
