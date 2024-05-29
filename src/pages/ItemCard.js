@@ -12,8 +12,6 @@ function ItemCard() {
         const formData = new FormData(event.target);
         const selectedSize = formData.get('size');
         const selectedColor = formData.get('color');
-        console.log(selectedSize, selectedColor, name)
-
         try {
             await addItemToCart({
                 itemName: name,
