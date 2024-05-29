@@ -64,15 +64,16 @@ export const getItemByName = async (itemName) => {
 export const addItemToCart = async (cartData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await api.post('http://localhost:8082/api/cart',{
+        const response = await api.post('http://localhost:8082/api/cart', JSON.stringify({
             itemName: cartData.itemName,
             size: cartData.size,
             color: cartData.color,
             quantity: 1
-        },
+        }),
         {
             headers: {
-                'Authorization': 'Bearer '+{token}
+                'Authorization': token,
+                'Content-Type': 'application/json'
             }
         });
         console.log(response.data);
