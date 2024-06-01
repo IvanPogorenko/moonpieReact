@@ -27,7 +27,6 @@ function Auth(){
         try {
             const token = await authenticateUser(formData.email, formData.password);
             if (token) {
-                console.log('Token received:', token);
                 localStorage.setItem('token', token);
                 setSuccess(true);
             } else {

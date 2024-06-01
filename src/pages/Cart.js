@@ -1,13 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/cart.css';
 import CartComponent from '../components/CartComponent';
 import CartReviewComponent from '../components/CartReviewComponent';
+import { useEffect, useState } from 'react';
+import { showItems } from '../api';
 
 function Cart(){
 
-    const cartArr = [{name: "name1", price: "100", size:"50", pictures:"/img/bruki.png", color:"dfbdshfs"},
-    {name: "name2", price: "200", size:"52", pictures:"/img/bruki.png", color:"dfbdshfs"},
-    {name: "name16", price: "300", size:"48", pictures:"/img/bruki.png", color:"dfbdshfs"},]
+    const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [totalPrise, setTotalPrice] = useState(0)
+
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            try {
+                const items = await showItems();
+                setCartItems(items);
+            } catch (error) {
+                setError('Failed to fetch cart items');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCartItems();
+    }, []);
 
     return(
         <>
@@ -16,32 +34,34 @@ function Cart(){
             </div>
             <div className='cartHeadContainer'>
                 <div className="cartContainer">
-                    <div className='cartComponents'>
-                        {cartArr.map((obj)=>(
-                                <CartComponent 
-                                name={obj.name}
-                                price={obj.price}
-                                size={obj.size}
-                                picture={obj.pictures}
-                                color={obj.color}
-                                />
-                            ))}
-                    </div>
-                    <div className='cartReview'>
-                        <h>Сумма заказа</h>
-                        {cartArr.map((obj)=>(
-                                <CartReviewComponent 
-                                name={obj.name}
-                                price={obj.price}
-                                />
-                        ))}
-                        <div className='Line'></div>
-                        <div className='HeaderInfo'>
-                            <p>Итого</p>
-                            <p>TotalPrice{}</p>
-                        </div>
-                        <button id='Order'>Оформить заказ</button>
-                    </div>
+                    {cartItems.length == 0? (
+                        <h>Ваша корзина пока что пуста</h>
+                    ):(
+                        <>
+                            <div className='cartComponents'>
+                            {cartItems.map((obj)=>(
+                                    <CartComponent 
+                                    name={obj.name}
+                                    price={obj.finalPrice}
+                                    size={obj.size}
+                                    picture={obj.photoUrl}
+                                    color={obj.color}
+                                    />
+                                ))}
+                            </div>
+                            <div className='cartReview'>
+                                <h>Сумма заказа</h>
+                                {cartItems.map((obj)=>(
+                                        <CartReviewComponent 
+                                        name={obj.name}
+                                        price={obj.finalPrice}
+                                        />
+                                ))}
+                                <div className='Line'></div>
+                                <Link to='/makeOrder'><button className='MakeOrder'>Оформить заказ</button></Link>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </>

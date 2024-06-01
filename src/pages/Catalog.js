@@ -6,13 +6,6 @@ import { getItemsByCategory } from "../api";
 
 function Catalog() {
 
-    const shopArr = [{name: "name1", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgsd"},
-    {name: "name2", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgsd"},
-    {name: "name3", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgsd"},
-    {name: "name4", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgsd"},
-    {name: "name5", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgsd"},
-    {name: "name16", price: "1234", sizes:"48, 50, 52", pictures:"/img/bruki.png", colors:"dfbdshfshdfbadsfsdkfhlgs"},]
-
     const [categoryName, setCategoryName] = useState('');
     const[products, setProducts] = useState([])
 
@@ -49,7 +42,6 @@ function Catalog() {
                 </Link>
                 {<p></p>}
                 <div className="Cards">
-                    {console.log(products, '123')}
                     {products.map((obj)=>(
                         <ShopCard 
                         name={obj.name}

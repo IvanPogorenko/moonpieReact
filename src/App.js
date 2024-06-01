@@ -11,6 +11,7 @@ import ItemCard from './pages/ItemCard';
 import Registration from './pages/Registration';
 import Auth from './pages/Auth';
 import Cart from './pages/Cart';
+import Order from './pages/Order';
 
 function App() {
   return (
@@ -28,9 +29,7 @@ function App() {
           <Route path="/registration" element={<Registration/>}></Route>
           <Route path="/authorisation" element={<Auth/>}></Route>
           <Route path="/cart" element={<Cart/>}></Route>
-          {/* <Route path="/catalog/blouse" element={<Blouse/>}></Route>
-          <Route path="/catalog/Tro" element={<Contacts/>}></Route>
-          <Route path="/how-to-order" element={<HowOrder/>}></Route> */}
+          <Route path="/makeOrder" element={<Order/>}></Route>
         </Routes>
         <Footer/>
       </Router>

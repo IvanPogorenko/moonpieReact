@@ -64,12 +64,12 @@ export const getItemByName = async (itemName) => {
 export const addItemToCart = async (cartData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await api.post('http://localhost:8082/api/cart', JSON.stringify({
+        const response = await api.post('http://localhost:8082/api/cart',{
             itemName: cartData.itemName,
             size: cartData.size,
             color: cartData.color,
             quantity: 1
-        }),
+        },
         {
             headers: {
                 'Authorization': token,
@@ -80,6 +80,46 @@ export const addItemToCart = async (cartData) => {
         return response.data;
     } catch (error) {
         console.error('Error adding item to cart:', error);
+        throw error;
+    }
+};
+
+export const showItems = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await api.get('http://localhost:8082/api/cart',
+        {
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error adding item to cart:', error);
+        throw error;
+    }
+};
+
+export const makeOrder = async (orderData) => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await api.post('http://localhost:8082/api/order', {
+            fullName: orderData.fullName,
+            city: orderData.city,
+            phoneNumber: orderData.phone,
+            address: orderData.address
+        },
+        {
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching items:', error);
         throw error;
     }
 };
